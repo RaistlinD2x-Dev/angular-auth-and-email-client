@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service';
+
 
 @Component({
   selector: 'app-signin',
@@ -21,9 +23,18 @@ export class SigninComponent implements OnInit {
     ]),
   })
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  onSubmit(): void {
+    if (this.authForm.invalid) {
+      return;
+    }
+
+    this.authService.signin(this.authForm.value)
+      .subscribe(() => {})
   }
 
 }
