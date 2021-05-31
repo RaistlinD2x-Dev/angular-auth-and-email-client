@@ -16,16 +16,23 @@ export class EmailShowComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private emailService: EmailService,
-    ) { }
+    ) { 
+      //initializes email to the snapshot so that it can't be undefined
+      this.email = this.route.snapshot.data.email;
+      // subscribes to the resolver Observable
+      this.route.data.subscribe(({ email }) => {
+        this.email = email
+      })
+    }
 
   ngOnInit(): void {
-    this.route.params.pipe(
-      switchMap(({ id }) => {
-        return this.emailService.getEmail(id);
-      })
-    ).subscribe((email) => {
-      this.email = email;
-    })
+    // this.route.params.pipe(
+    //   switchMap(({ id }) => {
+    //     return this.emailService.getEmail(id);
+    //   })
+    // ).subscribe((email) => {
+    //   this.email = email;
+    // })
 
     // creates issues with slow http requests
     // this.route.params.subscribe(({ id }) => {
