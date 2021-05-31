@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { EmailService } from '../email.service';
-import { switchMap } from 'rxjs/operators';
+// import { EmailService } from '../email.service';
+// import { switchMap } from 'rxjs/operators';
 import { Email } from '../email';
 
 
@@ -15,7 +15,7 @@ export class EmailShowComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private emailService: EmailService,
+    // private emailService: EmailService,
     ) { 
       //initializes email to the snapshot so that it can't be undefined
       this.email = this.route.snapshot.data.email;
