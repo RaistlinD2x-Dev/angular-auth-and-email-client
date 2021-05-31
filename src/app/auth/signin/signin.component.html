@@ -16,10 +16,22 @@
         [control]="authForm.get('password')"
     >
     </app-input>
-    <button
-        class="ui button primary"
-        type="submit"
+
+    <div 
+        *ngIf="authForm.errors" 
+        class="ui red basic label"
     >
-        Submit
-    </button>
+        <p *ngIf="authForm.errors.credentials">
+            Invalid username or password
+        </p>
+    </div>
+    
+    <div>
+        <button
+            class="ui button primary"
+            type="submit"
+        >
+            Submit
+        </button>
+    </div>
 </form>
