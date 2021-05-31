@@ -9,8 +9,12 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AppComponent {
   signedin$: BehaviorSubject<boolean>
-  
+
   constructor(private authService: AuthService) {
     this.signedin$ = this.authService.signedin$;
+  }
+
+  ngOnInit() {
+    this.authService.checkAuth().subscribe(() => {});
   }
 }
