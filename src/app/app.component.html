@@ -21,6 +21,7 @@
       </ng-container>
       <ng-container *ngIf="!(signedin$ | async)">
         <a 
+          [routerLinkActiveOptions]="{ exact: true}"
           class="ui item" 
           routerLink="/" 
           routerLinkActive="active"
