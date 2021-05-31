@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { EmailService } from '../email.service';
+import { switchMap } from 'rxjs/operators';
+import { Email } from '../email';
+
 
 @Component({
   selector: 'app-email-show',
@@ -7,13 +11,31 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./email-show.component.css']
 })
 export class EmailShowComponent implements OnInit {
+  email: Email;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    private route: ActivatedRoute,
+    private emailService: EmailService,
+    ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(({ id }) => {
-      console.log(id)
+    this.route.params.pipe(
+      switchMap(({ id }) => {
+        return this.emailService.getEmail(id);
+      })
+    ).subscribe((email) => {
+      this.email = email;
     })
+
+    // creates issues with slow http requests
+    // this.route.params.subscribe(({ id }) => {
+    //   this.emailService.getEmail(id).subscribe(email => {
+    //     console.log(email)
+    //   })
+    // })
+
+    // does not update with child loading unless you destroy parent component
+    // console.log(this.route.snapshot.params.id)
   }
 
 }
