@@ -20,6 +20,9 @@
         <p *ngIf="control.errors.pattern">
             Invalid format
         </p>
+        <p *ngIf="control.errors.email">
+            Enter a valid email address
+        </p>
         <p *ngIf="control.errors.nonUniqueUsername">
             Username is taken
         </p>
